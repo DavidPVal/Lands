@@ -5,7 +5,7 @@
              Title="Lands" 
              BindingContext="{Binding Main, Source={StaticResource Locator}} ">
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView BindingContext="{Binding Login}">
             <StackLayout Margin="5">
                 <Label 
                     FontSize="Large"
@@ -38,6 +38,7 @@
                         Grid.Row="0"
                         Grid.Column="1"
                         Keyboard="Email"
+                        Text="{Binding Email, Mode=TwoWay}"
                         Placeholder="Introduce tu email">
                     </Entry>
                     <Label
@@ -53,10 +54,12 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         IsPassword="True"
+                        Text="{Binding Password, Mode=TwoWay}"
                         Placeholder="Introduce tu password">
                     </Entry>
                 </Grid>
                 <ActivityIndicator
+                    IsRunning="{Binding IsRunning, Mode=TwoWay}"
                     VerticalOptions="CenterAndExpand">
                 </ActivityIndicator>
                 <StackLayout Orientation="Horizontal"
@@ -69,7 +72,9 @@
                         HorizontalOptions="StartAndExpand">
                     </Label>
                     <Switch
-                        HorizontalOptions="End">
+                        IsToggled="{Binding IsRemembered, Mode=TwoWay}"
+                        HorizontalOptions="End"
+                        OnColor="LightGreen">
                     </Switch>
                 </StackLayout>
                 <Label
@@ -86,6 +91,8 @@
                         TextColor="WhiteSmoke"
                         HeightRequest="50"
                         BorderRadius="25"
+                        Command="{Binding LoginCommand}"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                         HorizontalOptions="FillAndExpand">
                     </Button>
                     <Button
@@ -94,6 +101,7 @@
                         TextColor="WhiteSmoke"
                         HeightRequest="50"
                         BorderRadius="25"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                         HorizontalOptions="FillAndExpand">
                     </Button>
                 </StackLayout>
