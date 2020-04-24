@@ -8,39 +8,53 @@
         <StackLayout
             BindingContext="{Binding Lands}"
             Padding="5">
+            <SearchBar
+                Placeholder="Buscar..."
+                Text="{Binding Filter, Mode=TwoWay}"
+                SearchCommand="{Binding SearchCommand}">
+            </SearchBar>
             <ListView
                 HasUnevenRows="True"
                 IsPullToRefreshEnabled="True"
                 IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
                 ItemsSource="{Binding Lands}"
-                RefreshCommand="{Binding RefreshCommand}">
+                RefreshCommand="{Binding RefreshCommand}"
+                SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <StackLayout
+                            <Frame
+                                Margin="5"
+                                CornerRadius="25"
+                                HasShadow="True">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectLandCommand}"/>
+                                </Frame.GestureRecognizers>
+                                <Grid Padding="10,5,0,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout
                                     Grid.Column="0" VerticalOptions="Center">
-                                    <Label
-                                    FontAttributes="Bold"
-                                    FontSize="Medium"
-                                    Text="{Binding Name}"
-                                    TextColor="Black">
-                                    </Label>
-                                    <Label
+                                        <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Medium"
+                                        Text="{Binding Name}"
+                                        TextColor="Black">
+                                        </Label>
+                                        <Label
                                         Text="{Binding Capital}"
                                         TextColor="Black">
-                                    </Label>
+                                        </Label>
+                                    </StackLayout>
                                     <Image
                                         Grid.Column="1"
-                                        HorizontalOptions="End"
+                                        HorizontalOptions="End"                                       
                                         Source="ic_chevron_right">
                                     </Image>
-                                </StackLayout>
-                            </Grid>
+                                </Grid>
+                            </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
